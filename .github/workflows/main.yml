@@ -1,0 +1,48 @@
+---
+name: Lint-code 
+
+on: push
+
+jobs: 
+  super-lint:
+    name: Lint code base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+            
+      - name: Set up Python
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: '3.11.8'
+
+      - name: Install dependcies
+        run: |
+          pip install isort black
+
+      - name: Isort
+        run: isort . --profile black
+          
+      - name: Format code with Black
+        run: black .
+
+      - name: Commit changes if needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --exit-code || git commit -m "Apply formatting"
+          git push
+
+      - name: Run Super-Linter
+        uses:  super-linter/super-linter@v5.7.2
+        env: 
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON_MYPY: true
+          VALIDATE_PYTHON_BLACK: true
+        continue-on-error: true
+
+
