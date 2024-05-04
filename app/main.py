@@ -1,10 +1,9 @@
 import logging
 from contextlib import asynccontextmanager
 
-from data_base.dbcore import create_database
 from fastapi import FastAPI
-from model import Message, User
-from router import message_router, user_router
+from database import create_database
+from api import message_router, user_router
 
 
 @asynccontextmanager

@@ -1,10 +1,8 @@
-import enum
 from logging.config import fileConfig
 
 from decouple import config as decouple_config
-from model import Base
+from app.model import Base
 from sqlalchemy import engine_from_config, pool
-from sqlalchemy.orm import declarative_base
 
 from alembic import context
 
@@ -21,7 +19,8 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 
-sqlalchemy_url = decouple_config("DATABASE_URL", default="sqlite:///./db.sqlite3")
+sqlalchemy_url = decouple_config(
+    "DATABASE_URL", default="sqlite:///./db.sqlite3")
 config.set_main_option("sqlalchemy.url", sqlalchemy_url)
 
 
@@ -46,7 +45,8 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+        context.configure(
+            connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
