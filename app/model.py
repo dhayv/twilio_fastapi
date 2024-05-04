@@ -1,12 +1,12 @@
-from typing import List
-from sqlalchemy import Enum
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 import enum
+from typing import List
+
+from sqlalchemy import Enum, ForeignKey
+from sqlalchemy.orm import (Mapped, declarative_base, mapped_column,
+                            relationship)
 
 
-class Base(DeclarativeBase):
-    pass
+Base = declarative_base()
 
 
 # SqlAlchemy Model

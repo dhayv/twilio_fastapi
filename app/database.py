@@ -1,13 +1,20 @@
 from decouple import config
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, declarative_base
+from sqlalchemy.orm import Session
 from sqlalchemy_utils import database_exists
+
+from model import Base
 
 database_url = config("DATABASE_URL", default="sqlite:///./db.sqlite3")
 
 engine = create_engine(database_url)
 
-Base = declarative_base()
+
+def create_database():
+    if database_exists(engine.url):
+        pass
+    else:
+        Base.metadata.create_all(bind=engine)
 
 
 async def get_db():
@@ -19,10 +26,3 @@ async def get_db():
         raise e
     finally:
         db.close()
-
-
-def create_database():
-    if database_exists(engine.url):
-        pass
-    else:
-        Base.metadata.create_all(engine)

@@ -1,25 +1,24 @@
+import os
+
+from dotenv import load_dotenv
 from fastapi import APIRouter
 from twilio.rest import Client
-from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
 router = APIRouter
 
 
-account_sid = os.getenv('TWILIO_ACCOUNT_SID')
-auth_token = os.getenv('TWILIO_AUTH_TOKEN')
-twilio_number = os.getenv('TWILIO_NUMBER')
+account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+twilio_number = os.getenv("TWILIO_NUMBER")
 
 
 client = Client(account_sid, auth_token)
 
 
 message = client.messages.create(
-  from_=twilio_number,
-  body='Hello from Twilio',
-  to='+13059624210'
+    from_=twilio_number, body="Hello from Twilio", to="+13059624210"
 )
 
 print(message.sid)
