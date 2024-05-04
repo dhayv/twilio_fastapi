@@ -1,17 +1,15 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
 from data_base.dbcore import get_db
-from model import User
 
-router = APIRouter
+router = APIRouter()
 
 
-@router.post("/users/", response_model=User)
+@router.post("/users/")
 def add_user(db: Session = Depends(get_db)):
-    pass
+    return {"message": "made"}
 
 
-@router.get("/users/{user_id}", response_model=User)
+@router.get("/users/{user_id}")
 def read_user(db: Session = Depends(get_db)):
-    pass
+    return {"message": "made"}

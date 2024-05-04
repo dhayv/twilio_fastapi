@@ -1,17 +1,15 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
 from data_base.dbcore import get_db
-from model import Message
 
-router = APIRouter
+router = APIRouter()
 
 
-@router.post("/message/", response_model=Message)
+@router.post("/message/")
 def send_message(db: Session = Depends(get_db)):
-    pass
+    return {"message": "made"}
 
 
-@router.get("/message/{message_id}", response_model=Message)
+@router.get("/message/{message_id}")
 def retrieve_message(db: Session = Depends(get_db)):
-    pass
+    return {"message": "made"}
