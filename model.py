@@ -1,6 +1,7 @@
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, relationship, DeclarativeBase, mapped_column
 from enum import Enum
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
@@ -16,8 +17,8 @@ class User(Base):
 
 
 # class MessageDirection:
-    # INCOMING = "incoming"
-    # OUTGOING = "outgoing"
+# INCOMING = "incoming"
+# OUTGOING = "outgoing"
 
 
 class Message(Base):

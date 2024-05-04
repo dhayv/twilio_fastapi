@@ -1,10 +1,9 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, Session
 from decouple import config
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, declarative_base
 from sqlalchemy_utils import database_exists
 
-
-database_url = config('DATABASE_URL', default='sqlite:///./db.sqlite3')
+database_url = config("DATABASE_URL", default="sqlite:///./db.sqlite3")
 
 engine = create_engine(database_url)
 
