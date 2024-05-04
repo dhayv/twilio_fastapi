@@ -1,5 +1,8 @@
-venv
-.env
-# Ignore SQLite database files
+*.env
+*venv
+.DS_Store
+*.log
+
 /data
 *.pyc
+*__pycache__
