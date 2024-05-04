@@ -1,5 +1,6 @@
-from sqlalchemy import ForeignKey, Enum
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, relationship, DeclarativeBase, mapped_column
+from enum import Enum
 
 
 class Base(DeclarativeBase):
@@ -12,6 +13,11 @@ class User(Base):
     phone_number: Mapped[str] = mapped_column(unique=True)
 
     addresses: Mapped["Message"] = relationship(back_populates="user")
+
+
+# class MessageDirection:
+    # INCOMING = "incoming"
+    # OUTGOING = "outgoing"
 
 
 class Message(Base):
