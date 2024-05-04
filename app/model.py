@@ -2,9 +2,7 @@ import enum
 from typing import List
 
 from sqlalchemy import Enum, ForeignKey
-from sqlalchemy.orm import (Mapped, declarative_base, mapped_column,
-                            relationship)
-
+from sqlalchemy.orm import Mapped, declarative_base, mapped_column, relationship
 
 Base = declarative_base()
 
