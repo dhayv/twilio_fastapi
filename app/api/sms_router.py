@@ -1,12 +1,16 @@
 import os
 
 from dotenv import load_dotenv
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 from twilio.rest import Client
+
+from database import get_db
+from model import Message, User
 
 load_dotenv()
 
-router = APIRouter
+router = APIRouter()
 
 
 account_sid = os.getenv("TWILIO_ACCOUNT_SID")
@@ -17,20 +21,15 @@ twilio_number = os.getenv("TWILIO_NUMBER")
 client = Client(account_sid, auth_token)
 
 
-message = client.messages.create(
-    from_=twilio_number, body="Hello from Twilio", to="+13059624210"
-)
-
-print(message.sid)
-
-# Print detailed output
-print(f"Message SID: {message.sid}")
-print(f"Message Status: {message.status}")
-print(f"Sent from: {message.from_}")
-print(f"Sent to: {message.to}")
-print(f"Message Body: {message.body}")
-
-
 @router.post("/sms/")
-def send_sms():
-    return {"message": "made"}
+def send_sms(
+    user_data: User,
+    msg_info: Message,
+    db: Session = Depends(get_db)):
+    message = client.messages.create(
+        from_=twilio_number,
+        body=msg_info.message,
+        to=user_data.phone_number,
+    )
+
+    print(message.sid)
