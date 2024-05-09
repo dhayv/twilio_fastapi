@@ -6,11 +6,17 @@ from database import get_db
 router = APIRouter()
 
 
-@router.post("/users/")
-def add_user(db: Session = Depends(get_db)):
-    return {"message": "made"}
+# Add a new sms user to db no need to check if your users already exist
+@router.post("/users/", response_model=)
+def add_user(phone_num: str, db: Session = Depends(get_db)):
+    user = User(phone_number=phone_num)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return  {"id": user.id, "phone_number": user.phone_number}
 
-
-@router.get("/users/{user_id}")
-def read_user(db: Session = Depends(get_db)):
-    return {"message": "made"}
+# Retrieve user info from db 
+@router.get("/users/{phone_number}", response_model=)
+def read_user(phone_num, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.phone_number == phone_num).first()
+    return user
