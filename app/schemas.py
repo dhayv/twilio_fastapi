@@ -17,7 +17,8 @@ class UserCreate(UserBase):
 class UserResponse(UserBase):
     id: int
     """Response schema for user data.
-    Includes the user's database ID and phone number."""
+    Includes the user's database ID and phone number.
+    What the endpoint will use to protect sensitive data"""
 
     class Config:
         orm_mode = True
@@ -46,7 +47,8 @@ class MessageResponse(MessageBase):
     id: int
     user_id: int
     """Response schema for message data.
-    Includes database ID and associated user ID."""
+    Includes database ID and associated user ID.
+    What the endpoint will use to protect sensitive data"""
 
     class Config:
         orm_mode = True
