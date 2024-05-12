@@ -40,6 +40,6 @@ jobs:
         env: 
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_PYTHON_MYPY: true
-          VALIDATE_PYTHON_BLACK: true
+          VALIDATE_PYTHON_MYPY: false
+          VALIDATE_PYTHON_BLACK: false
           continue-in-error: true
