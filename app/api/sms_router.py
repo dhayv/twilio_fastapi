@@ -1,13 +1,12 @@
 import os
 
+from database import get_db
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException
+from model import Message, MessageDirection, User
+from schemas import MessageCreate
 from sqlalchemy.orm import Session
 from twilio.rest import Client
-
-from database import get_db
-from schemas import MessageCreate
-from model import User, Message, MessageDirection
 
 load_dotenv()
 
@@ -24,16 +23,8 @@ client = Client(account_sid, auth_token)
 
 # User_id to identify the user to send sms
 # User_id to to also log the messsage and the direction
-@router.post("/sms/send/{user_id}")
-def send_sms(
-    user_id: int,
-    message_data: MessageCreate,
-    db: Session = Depends(get_db)
-):
-
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+@router.post("/sms/send/")
+def send_sms(user_id: int, message_data: MessageCreate, db: Session = Depends(get_db)):
 
     try:
         sent_message = client.messages.create(
@@ -47,7 +38,8 @@ def send_sms(
     log_message = Message(
         message=message_data.message,
         direction=MessageDirection.OUTGOING,
-        user_id=user_id)
+        user_id=user_id,
+    )
 
     db.add(log_message)
     db.commit()
@@ -56,12 +48,12 @@ def send_sms(
     return {"status": "Message sent", "sid": sent_message.sid}
 
 
-@router.get("/sms/send")
-def fetch_sms(
-    user_data: User,
-    msg_info: Message,
-    db: Session = Depends(get_db)
-):
+@router.get("/sms/receive/{user_id}")
+def fetch_sms(user_data: User, msg_info: Message, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
     message = client.messages.create(
         from_=twilio_number,
         body=msg_info.message,

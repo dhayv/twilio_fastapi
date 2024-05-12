@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-from schemas import MessageResponse, MessageCreate
 from database import get_db
+from fastapi import APIRouter, Depends, HTTPException
 from model import Message
+from schemas import MessageCreate, MessageResponse
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
@@ -10,9 +10,8 @@ router = APIRouter()
 @router.post("/messages/", response_model=MessageResponse)
 def send_message(messages: MessageCreate, db: Session = Depends(get_db)):
     new_message = Message(
-        message=messages.message,
-        direction=messages.direction,
-        user_id=messages.user_id)
+        message=messages.message, direction=messages.direction, user_id=messages.user_id
+    )
     db.add(new_message)
     db.commit()
     db.refresh(new_message)
