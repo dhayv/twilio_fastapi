@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from twilio.request_validator import RequestValidator
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
-
+from schemas import MessageResponse
 from database import get_db
 from model import Message, MessageDirection, User
 
@@ -27,7 +27,7 @@ client = OpenAI()
 # defaults to getting the key using
 
 
-@router.post("sms/receive", response_model=MessagingResponse)
+@router.post("/sms/receive", response_model=MessageResponse)
 async def receive_sms(request: Request, db: Session = Depends(get_db)):
     form_data = await request.form()
     from_number = form_data.get("From", None)
@@ -78,7 +78,7 @@ async def receive_sms(request: Request, db: Session = Depends(get_db)):
     return response.message("Thank you for using our service")
 
 
-@router.post("sms/send{user_id}", response_model=MessagingResponse)
+@router.post("/sms/send{user_id}", response_model=MessageResponse)
 async def send_response(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:

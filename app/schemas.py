@@ -21,7 +21,7 @@ class UserResponse(UserBase):
     What the endpoint will use to protect sensitive data"""
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         """Configures the schema to treat dictionaries as ORM models
         facilitating compatibility with SQLAlchemy."""
 
@@ -51,5 +51,5 @@ class MessageResponse(MessageBase):
     What the endpoint will use to protect sensitive data"""
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         """Enables ORM mode for compatibility with SQLAlchemy models."""

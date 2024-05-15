@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from api import message_router, user_router
+from api import sms_router
 from database import create_database
 
 
@@ -16,10 +16,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI()
 
 
-@app.get("api")
+@app.get("/api")
 def hello():
     return {"message": "Hello, World"}
 
 
-app.include_router(message_router.router)
-app.include_router(user_router.router)
+app.include_router(sms_router.router)
