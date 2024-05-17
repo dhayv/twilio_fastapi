@@ -127,3 +127,55 @@ async def send_response(user_id: int, db: Session = Depends(get_db)):
     db.refresh(log_message)
 
     return log_message
+
+
+@router.post("/sms/receive/mock", response_model=MessageResponse)
+async def mock_sms(request: Request, db: Session = Depends(get_db)):
+    form_data = await request.form()
+    from_number = form_data.get("From", None)
+    body = form_data.get("Body", None)
+
+    if not all([from_number, body]):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Missing Message Details"
+        )
+
+    validator = RequestValidator(auth_token)
+    if not validator.validate(
+        str(request.url), form_data, request.headers.get("X-Twilio-Signature", "")
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Twilio Signature"
+        )
+
+    # Validate input parameters
+    if not all(from_number.startswith("+")):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid input parameters"
+        )
+
+    if not all([account_sid, auth_token]):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Missing API keys"
+        )
+
+    # Check if user exists or create a new one
+    user = db.query(User).filter(User.phone_number == from_number).first()
+    if not user:
+        user = User(phone_number=from_number)
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    """
+    # Log message from Twilio
+    log_message = Message(
+        user_id=user.id, message=body, direction=MessageDirection.INCOMING
+    )
+
+    db.add(log_message)
+    db.commit()
+    db.refresh(log_message)
+
+    response = MessagingResponse()
+    return response.message("Thank you for using our service") """
