@@ -1,10 +1,22 @@
+import os
 import pytest
 from unittest.mock import patch
 from fastapi import status
+from model import User, Message, MessageDirection
+
+
+@pytest.fixture(scope="module")
+def mock_env():
+    os.environ("TWILIO_ACCOUNT_SID", "test_sid")
+    os.environ("TWILIO_AUTH_TOKEN", "test_token")
+    os.environ("TWILIO_NUMBER", "+123456789")
+    os.environ("OPENAI_API_KEY", "test_openai_key")
+
 
 @pytest.fixture
 def twilio_signature():
     return "test_twilio_signature"
+
 
 @pytest.fixture
 def twilio_form_data():
@@ -12,6 +24,7 @@ def twilio_form_data():
         "From": "+123456789",
         "Body": "Hello"
     }
+
 
 @pytest.mark.asyncio
 @patch("app.routes.RequestValidator.validate", return_value=True)
@@ -24,6 +37,7 @@ async def test_receive_sms(mock_twilio_create, mock_twilio_validate, client, twi
     )
     assert response.status_code == status.HTTP_200_OK
     assert "Thank you for using our service" in response.json()["message"]
+
 
 @pytest.mark.asyncio
 @patch("app.routes.openai.Completion.create")

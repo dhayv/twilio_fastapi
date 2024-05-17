@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from api import sms_router
+from app import sms_router
 from database import create_database
 
 
