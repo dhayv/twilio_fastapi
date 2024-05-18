@@ -1,16 +1,16 @@
 import os
 
 import openai
+from server_app.database import get_db
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from server_app.model import Message, MessageDirection, User
 from openai import OpenAI
+from server_app.schemas import MessageResponse
 from sqlalchemy.orm import Session
 from twilio.request_validator import RequestValidator
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
-from schemas import MessageResponse
-from database import get_db
-from model import Message, MessageDirection, User
 
 load_dotenv()
 

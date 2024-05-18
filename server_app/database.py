@@ -1,9 +1,8 @@
 from decouple import config
+from server_app.model import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import database_exists
-
-from model import Base
 
 database_url = config("DATABASE_URL", default="sqlite:///./db.sqlite3")
 
