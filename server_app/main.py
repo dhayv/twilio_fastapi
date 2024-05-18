@@ -1,10 +1,10 @@
 import logging
 from contextlib import asynccontextmanager
 
-from server_app.database import create_database
 from fastapi import FastAPI
 
 from server_app import sms_router
+from server_app.database import create_database
 
 
 @asynccontextmanager
