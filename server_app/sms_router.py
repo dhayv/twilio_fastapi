@@ -2,11 +2,11 @@ import os
 
 import openai
 from dotenv import load_dotenv
-from fastapi import APIRouter, Depends, HTTPException, Request, status
-from openai import OpenAI
+from fastapi import APIRouter, Depends, HTTPException, Request, status, Response
+from openai import OpenAI as OpenAIClient
 from sqlalchemy.orm import Session
 from twilio.request_validator import RequestValidator
-from twilio.rest import Client
+from twilio.rest import Client as TwilioClient
 from twilio.twiml.messaging_response import MessagingResponse
 
 from server_app.database import get_db
@@ -22,15 +22,16 @@ auth_token = os.getenv("TWILIO_AUTH_TOKEN")
 twilio_number = os.getenv("TWILIO_NUMBER")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-client = Client(account_sid, auth_token)
+twilio_client = TwilioClient(account_sid, auth_token)
 
-client = OpenAI()
+openai_client = OpenAIClient()
 # defaults to getting the key using
 
 
 @router.post("/sms/receive", response_model=MessageResponse)
 async def receive_sms(request: Request, db: Session = Depends(get_db)):
     form_data = await request.form()
+    print("Received form data:", form_data)
     from_number = form_data.get("From", None)
     body = form_data.get("Body", None)
 
@@ -76,7 +77,8 @@ async def receive_sms(request: Request, db: Session = Depends(get_db)):
     db.refresh(log_message)
 
     response = MessagingResponse()
-    return response.message("Thank you for using our service")
+    msg = response.message(f'Thank you for using our service, {user.id}')
+    return Response(content=str(response), media_type="application/xml")
 
 
 @router.post("/sms/send{user_id}", response_model=MessageResponse)
