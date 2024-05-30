@@ -32,18 +32,22 @@ openai_client = OpenAIClient()
 async def receive_sms(request: Request, db: Session = Depends(get_db)):
     form_data = await request.form()
     print("Received form data:", form_data)
+
     from_number = form_data.get("From", None)
     body = form_data.get("Body", None)
 
     if not all([from_number, body]):
+
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Missing Message Details"
         )
 
     validator = RequestValidator(auth_token)
-    if not validator.validate(
+    valid = validator.validate(
         str(request.url), form_data, request.headers.get("X-Twilio-Signature", "")
-    ):
+    )
+    if not valid:
+        print("Validation failed")  # Debug output
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Twilio Signature"
         )
