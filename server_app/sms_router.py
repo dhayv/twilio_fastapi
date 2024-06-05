@@ -2,7 +2,7 @@ import os
 
 import openai
 from dotenv import load_dotenv
-from fastapi import APIRouter, Depends, HTTPException, Request, status, Response
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from openai import OpenAI as OpenAIClient
 from sqlalchemy.orm import Session
 from twilio.request_validator import RequestValidator
@@ -81,7 +81,7 @@ async def receive_sms(request: Request, db: Session = Depends(get_db)):
     db.refresh(log_message)
 
     response = MessagingResponse()
-    msg = response.message(f'Thank you for using our service, {user.id}')
+    msg = response.message(f"Thank you for using our service, {user.id}")
     return Response(content=str(response), media_type="application/xml")
 
 

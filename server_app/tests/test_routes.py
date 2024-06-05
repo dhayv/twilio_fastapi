@@ -1,5 +1,5 @@
 import os
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 from fastapi import status
@@ -7,9 +7,9 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from twilio.rest import Client
+
 from server_app.database import Base, get_db
 from server_app.main import app
-
 
 # Set up test database
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
@@ -66,8 +66,7 @@ def twilio_signature():
 
 @pytest.fixture
 def twilio_form_data():
-    return {"From": "+18553456789",
-            "Body": "Hello"}
+    return {"From": "+18553456789", "Body": "Hello"}
 
 
 @pytest.mark.asyncio
