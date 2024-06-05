@@ -1,7 +1,7 @@
 """Initial database migration
 
 Revision ID: 01914f1d9950
-Revises: 
+Revises:
 Create Date: 2024-05-04 16:00:40.633638
 
 """

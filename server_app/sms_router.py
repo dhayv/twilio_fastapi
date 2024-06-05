@@ -39,24 +39,25 @@ async def receive_sms(request: Request, db: Session = Depends(get_db)):
     if not all([from_number, body]):
 
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Missing Message Details"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing Message Details")
 
     validator = RequestValidator(auth_token)
     valid = validator.validate(
-        str(request.url), form_data, request.headers.get("X-Twilio-Signature", "")
+        str(request.url), form_data, request.headers.get(
+            "X-Twilio-Signature", "")
     )
     if not valid:
         print("Validation failed")  # Debug output
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Twilio Signature"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid Twilio Signature")
 
     # Validate input parameters
     if not all(from_number.startswith("+")):
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid input parameters"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid input parameters")
 
     if not all([account_sid, auth_token]):
         raise HTTPException(
