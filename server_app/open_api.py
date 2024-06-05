@@ -14,14 +14,14 @@ completion = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.",
+            "content": "You are a text message assistant, you are skilled in returning simple answers to a users query, all messages are done through text messages so be mindful of character limits",
         },
         {
             "role": "user",
-            "content": "Compose a poem that explains the concept of recursion in programming.",
+            "content": "whats is earth population",
         },
     ],
 )
 
 
-print(completion.choices[0].message)
+print(completion.choices[0].message.content)
