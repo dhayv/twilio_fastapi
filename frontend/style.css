@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color:white;
+    margin-top: 7rem;
+    min-height: 100vh;
+    align-items:baseline;
+    text-align: center;
+
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+
+}
