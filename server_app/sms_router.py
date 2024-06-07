@@ -1,6 +1,5 @@
 import os
 
-import openai
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from openai import OpenAI as OpenAIClient
@@ -17,14 +16,14 @@ load_dotenv()
 
 router = APIRouter()
 
-account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-auth_token = os.getenv("TWILIO_AUTH_TOKEN")
-twilio_number = os.getenv("TWILIO_NUMBER")
-openai.api_key = os.getenv("OPENAI_API_KEY")
+account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+twilio_number = os.environ.get("TWILIO_NUMBER")
+api_key = os.getenv("OPENAI_API_KEY")
 
 twilio_client = TwilioClient(account_sid, auth_token)
 
-openai_client = OpenAIClient()
+openai_client = OpenAIClient(api_key=api_key)
 # defaults to getting the key using
 
 
@@ -39,25 +38,24 @@ async def receive_sms(request: Request, db: Session = Depends(get_db)):
     if not all([from_number, body]):
 
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Missing Message Details")
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Missing Message Details"
+        )
 
     validator = RequestValidator(auth_token)
     valid = validator.validate(
-        str(request.url), form_data, request.headers.get(
-            "X-Twilio-Signature", "")
+        str(request.url), form_data, request.headers.get("X-Twilio-Signature", "")
     )
     if not valid:
         print("Validation failed")  # Debug output
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid Twilio Signature")
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Twilio Signature"
+        )
 
     # Validate input parameters
     if not all(from_number.startswith("+")):
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid input parameters")
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid input parameters"
+        )
 
     if not all([account_sid, auth_token]):
         raise HTTPException(
@@ -106,16 +104,26 @@ async def send_response(user_id: int, db: Session = Depends(get_db)):
     )
 
     # generate ai repsponse
-    completion = openai.completions.create(
-        model="text-davinci-003", prompt=user_message.message, max_tokens=150
+    completion = openai_client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a text message assistant, you are skilled in returning simple answers to a users query, all messages are done through text messages so be mindful of character limits",
+            },
+            {
+                "role": "user",
+                "content": {user_message},
+            },
+        ],
     )
 
-    ai_response = completion.choices[0].text.strip()
+    ai_response = completion.choices[0].message.content.strip()
 
     # send response to user via Twilio
     try:
 
-        client.messages.create(
+        twilio_client.messages.create(
             body=ai_response,
             to=user.phone_number,
             from_=twilio_number,
