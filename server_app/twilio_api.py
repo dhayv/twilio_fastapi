@@ -12,13 +12,14 @@ router = APIRouter
 account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
 auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
 twilio_number = os.environ.get("TWILIO_NUMBER")
+user_number = os.environ.get("USER_NUMBER")
 
 
 client = Client(account_sid, auth_token)
 
 
 message = client.messages.create(
-    from_=twilio_number, body="Hello from Twilio", to="+18777804236"
+    from_=twilio_number, body="Hello Maya A.", to=user_number
 )
 
 print(message.sid)
