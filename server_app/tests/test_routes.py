@@ -16,10 +16,7 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
-TestingSessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine)
+TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 @pytest.fixture(scope="session")
@@ -79,8 +76,7 @@ async def test_receive_sms(
     mock_validator, mock_client, client, twilio_signature, twilio_form_data
 ):
     mock_validator.return_value.validate.return_value = True
-    mock_client.return_value.messages.create.return_value = MagicMock(
-        sid="12345")
+    mock_client.return_value.messages.create.return_value = MagicMock(sid="12345")
 
     response = client.post(
         "/sms/receive",
