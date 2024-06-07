@@ -60,3 +60,7 @@ We are currently working on getting the phone number verified by Twilio. Stay tu
 ## Author
 
 Dhayv
+
+## My Process
+
+I first installed and setup a basic fastapi application. Than I Created the tables and how the were going to be related for my database integrated alembic to migrate the tables. From there it was simply adding the twilio webhooks and openai webhooks testing each webhook indiviually to make sure i was getting the outputs i was seeking. The most difficult part was probaly layering and designing the endpoints since this program had no users and was not receiving information from a frontend and no data was really needed to be validated using pydantic I had to think outside the box from what I am normally used too. I needed to be able to receive data from a users phone to feed to the api which logs the data into the datbase and and a another endpint is used to essentially read the database to get the users message send it to chatgpt and the response is outputed again via twilio.
