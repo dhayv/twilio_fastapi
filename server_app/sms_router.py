@@ -1,8 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from fastapi import (APIRouter, Depends, HTTPException, Request, Response,
-                     status)
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from openai import OpenAI as OpenAIClient
 from sqlalchemy.orm import Session
 from twilio.request_validator import RequestValidator
