@@ -73,6 +73,10 @@ ul{
     font-size: 14px;
 }
 
+.center{
+    margin-left: .5rem;
+}
+
 .highlight {
     color: #007BFF;
     font-weight: bold;
