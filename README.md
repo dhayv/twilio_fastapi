@@ -1,6 +1,8 @@
 # A.I.M.A.B.O.T (AI Me Anything Bot)
 
-## Coming Soon currently building
+## Coming Soon currently building 
+
+This app will no longer feature Twilio due to complications of getting a number registered so we will be moving to a web application instead using a htmx frontend and fastapi under the hood :).
 
 ## Table of Contents
 
