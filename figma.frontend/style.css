@@ -2,3 +2,95 @@
     margin: 0;
     padding: 0;
 }
+
+html, body {
+    height: 100%;
+}
+
+
+#container{
+
+    color: white;
+    font-family: "Outfit", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    
+}
+
+.navigation{
+    padding: 24px 160px;
+    background: #F5F5F5;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+
+}
+
+.home{
+    color: black;
+    font-size: 26px;
+    font-family: "Outfit", sans-serif;;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.77) 0%, rgba(102, 102, 102, 0.77) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.home2{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #1069EF;
+}
+
+.about{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #1069EF;
+}   
+
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+footer{
+    justify-content: center;
+    align-items: center;
+    
+    gap: 15px;
+    position: absolute;
+    bottom: 0;
+}
+
+.privacy{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #1069EF;
+    
+}
+
+.line{
+    width: 2px;
+    height: 30px;
+    background: black;
+}
+.terms{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #1069EF;
+}
