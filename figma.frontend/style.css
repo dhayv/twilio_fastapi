@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
@@ -18,14 +19,14 @@ html, body {
     
 }
 
-.navigation{
-    padding: 24px 160px;
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 160px;
+    align-items: center;
     background: #F5F5F5;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-
+    height: 40px;
 }
 
 .home{
@@ -41,7 +42,7 @@ html, body {
 }
 
 .home2{
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -49,7 +50,7 @@ html, body {
 }
 
 .about{
-    font-size: 20px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -67,14 +68,14 @@ html, body {
 footer{
     justify-content: center;
     align-items: center;
-    
+    display: flex;
     gap: 15px;
-    position: absolute;
+    padding: 5px;
     bottom: 0;
 }
 
 .privacy{
-    font-size: 20px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -83,12 +84,12 @@ footer{
 }
 
 .line{
-    width: 2px;
-    height: 30px;
+    width: 1px;
+    height: 15px;
     background: black;
 }
 .terms{
-    font-size: 20px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
