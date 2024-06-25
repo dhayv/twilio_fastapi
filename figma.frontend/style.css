@@ -16,6 +16,7 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    font-size: 16px;
     
 }
 
@@ -58,14 +59,102 @@ nav {
 }   
 
 .content {
-    flex: 1;
+    margin-top: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: black;
+    gap: 15px;
     padding: 20px;
-    background-color: white;
 }
+
+input {
+    width: 580px;
+    height: 48.5px;
+    border-radius: 30px;
+    border: 1px solid #3F9595;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px #F5F5F5;
+    padding-left: 40px;
+    font-size: 16px;
+}
+
+.title:hover,
+.title:focus {
+  color: var(--Yellow, #f4d04e);
+}
+
+form {
+    position: relative;
+}
+
+form img{
+    width: 20px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.content p { 
+    color: #505050;
+    font-size: 18px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.content2 {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    color: black;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.left-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 50%;
+}
+
+.left-section h1{
+    color: #505050;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.center-section{
+    flex-shrink: 0;
+    text-align: center;
+    margin-left: 50%;
+}
+.center-section p{
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+
+.bottom-section ul {
+    color: #505050;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.bottom-section ul li {
+    margin-bottom: 10px;
+
+}
+
+
 
 footer{
     justify-content: center;
