@@ -106,12 +106,13 @@ form img{
 .content2 {
     flex: 1;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: white;
-    color: black;
+    justify-content: center; 
+    color: #505050;
     flex-direction: column;
     padding: 20px;
+    height: 100vh;
 }
 
 .left-section{
@@ -129,7 +130,6 @@ form img{
     font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
-    margin-bottom: 20px;
 }
 
 .center-section{
@@ -142,12 +142,18 @@ form img{
     line-height: 1.5;
 }
 
-
+.bottom-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    margin-right: 50%;
+    padding: 20px;
+}
 .bottom-section ul {
     color: #505050;
     list-style: none;
-    margin: 0;
-    padding: 0;
+
 }
 .bottom-section ul li {
     margin-bottom: 10px;
