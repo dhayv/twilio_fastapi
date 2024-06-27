@@ -4,12 +4,11 @@ from unittest.mock import MagicMock, patch
 import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
+from server_app.database import Base, get_db
+from server_app.main import app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from twilio.rest import Client
-
-from server_app.database import Base, get_db
-from server_app.main import app
 
 # Set up test database
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"

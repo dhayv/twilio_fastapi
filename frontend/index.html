@@ -4,39 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Aimabot</title>
+    <title>Home</title>
 </head>
 <body>
-    <div class="header">
-        <p>AIMABOT</p>
-    </div>
-
     <div id="container">
+        <nav>
+            <div class="home">
+                
+                <a href="index.html">Aimabot</a>
+            </div>
+            <div class="about">
+                <a href="about.html">About</a>
+            </div>
+        </nav>
         
         <div class="content">
-            <p class="subtitle">EFFORTLESS ANSWERS, NO APP NEEDED</p>
-
-            <div class="center">
-                <h1>Welcome to Aimabot</h1>
-
-                <p class="under-subtitle">Experience the convenience of instant information at your fingertips with Aimabot. No downloads, no hassle – just text "START" to () and get quick, accurate answers to your everyday questions.</p>
-
-                <h2>Why Choose Aimabot?</h2>
-
-                <ul>
-                    <li><span class="highlight">Seamless Experience: </span> Get the answers you need without the burden of downloading apps.</li>
-                    <li><span class="highlight">Instant Assistance: </span>Enjoy the luxury of immediate responses to your queries.</li>
-                    <li><span class="highlight">Easy to Use: </span>Simply text "START" to () and start receiving help.</li>
-                    <li>Embrace the future of effortless assistance. Text<span class="highlight"> "START" </span>now and let Aimabot make your life simpler.</li>
-                </ul>
-        
-                <p class="bottom-p">Join the revolution of hassle-free help. Text "START" now and make your life easier with Aimabot.</p>
-            </div>
+            <p>Your Questions, Straight Answers – Powered by AI.</p>
+            
+            <form id="formData">
+                <img src="../images/Interface/glass.png" alt="">
+                <input type="text" id="userInput" placeholder="Ask Aimabot">
+                <input type="submit" style="display: none" />
+            </form>
         </div>
+
+        <footer>
+            <div class="privacy">
+                Privacy
+                <a href=""></a>
+            </div>
+
+            <div class="line">
+                
+            </div>
+
+            <div class="terms">
+                Terms
+                <a href=""></a>
+            </div>
+        </footer>
     </div>
-    
+        <script src="main.js"></script>
 </body>
 </html>

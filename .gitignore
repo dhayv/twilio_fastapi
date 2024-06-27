@@ -3,7 +3,7 @@
 .DS_Store
 *.log
 *.md
-
+*node_modules
 
 /data
 *.pyc
