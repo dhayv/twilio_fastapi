@@ -1,5 +1,5 @@
 import os
-
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from openai import OpenAI
@@ -11,6 +11,20 @@ load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 app = FastAPI()
+
+origins = [
+    'http://localhost:5500',
+    'http://localhost:5000'
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allo_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+
+)
 
 response_manager = AIResponse()
 
@@ -25,7 +39,7 @@ def hello():
 
 
 @app.post(
-    "/usersearch",
+    "/api/usersearch",
 )
 async def send_question(user_response: UserMessage):
     request_id = response_manager.generate_id()
@@ -53,7 +67,7 @@ async def send_question(user_response: UserMessage):
 
 
 @app.get(
-    "/response",
+    "/api/response",
 )
 async def get_response(request_id: str):
     response = response_manager.get_response(request_id)
