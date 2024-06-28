@@ -26,10 +26,18 @@
             
             <form id="formData">
                 <img src="../images/Interface/glass.png" alt="">
-                <input type="text" id="userInput" placeholder="Ask Aimabot">
-                <input type="submit" style="display: none" />
+                <div class="input-container">
+                    <input class="userinput" type="text" id="userInput" placeholder="Ask Aimabot">
+                    <span class="hidden-span" id="hiddenSpan"></span>
+                </div>
+                <input type="submit" style="display: none">
             </form>
-        </div>
+            <div id="responsefield">
+                <div class="input-container">
+                    <textarea class="box" id="responseInput" readonly></textarea>
+                    <span class="hidden-span" id="responseHiddenSpan"></span>
+                </div>
+            </div>
 
         <footer>
             <div class="privacy">
@@ -47,6 +55,7 @@
             </div>
         </footer>
     </div>
-        <script src="main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="module" src="main.js"></script>
 </body>
 </html>
