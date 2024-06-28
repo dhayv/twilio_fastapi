@@ -14,7 +14,7 @@ app = FastAPI()
 
 origins = [
     'http://localhost:5500',
-    'http://localhost:5000'
+    'http://127.0.0.1:5500',
 ]
 
 app.add_middleware(
@@ -23,7 +23,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-
 )
 
 response_manager = AIResponse()
@@ -39,7 +38,7 @@ def hello():
 
 
 @app.post(
-    "/api/usersearch",
+    "/usersearch",
 )
 async def send_question(user_response: UserMessage):
     request_id = response_manager.generate_id()
@@ -67,12 +66,14 @@ async def send_question(user_response: UserMessage):
 
 
 @app.get(
-    "/api/response",
+    "/response",
 )
 async def get_response(request_id: str):
     response = response_manager.get_response(request_id)
 
     if response is None:
         raise HTTPException(status_code=404, detail="Response not found")
+
+    response = response.replace('"', '') if isinstance(response, str) else response
 
     return {"response": response}
