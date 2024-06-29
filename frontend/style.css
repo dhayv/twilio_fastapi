@@ -168,63 +168,82 @@ form img{
 }
 
 .content2 {
-    flex: 1;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     background-color: white;
-    justify-content: center; 
     color: #505050;
-    flex-direction: column;
     padding: 20px;
     height: 100vh;
+    justify-content: space-between;
 }
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    justify-content: center; 
+    box-sizing: border-box;
+    
+  }
 
 .left-section{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-right: 50%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .left-section h1{
+    flex-shrink: 0;
     color: #505050;
     font-size: 64px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-transform: capitalize;
+    text-align: center;
+    
 }
 
+.left-section h1 span {
+    display: block;
+  }
+
 .center-section{
-    flex-shrink: 0;
+    flex: 1;
     text-align: center;
-    margin-left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    
 }
 .center-section p{
     font-size: 20px;
     line-height: 1.5;
+    text-align: left;
+    margin: 0;
+    padding: 0;
 }
 
 .bottom-section{
     display: flex;
     flex-direction: column;
     justify-content: left;
+    justify-content: flex-start;
     align-items: flex-start;
-    margin-right: 50%;
     padding: 20px;
+    box-sizing: border-box;
 }
 .bottom-section ul {
     color: #505050;
     list-style: none;
+    padding: 0;
 
 }
-.bottom-section ul li {
-    margin-bottom: 10px;
-
-}
-
-
 
 footer{
     justify-content: center;
