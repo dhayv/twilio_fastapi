@@ -1,7 +1,8 @@
 import os
-from fastapi.middleware.cors import CORSMiddleware
+
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from pydantic import BaseModel
 from services import AIResponse
@@ -13,8 +14,8 @@ client = OpenAI(api_key=api_key)
 app = FastAPI()
 
 origins = [
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
 ]
 
 app.add_middleware(
@@ -74,6 +75,6 @@ async def get_response(request_id: str):
     if response is None:
         raise HTTPException(status_code=404, detail="Response not found")
 
-    response = response.replace('"', '') if isinstance(response, str) else response
+    response = response.replace('"', "") if isinstance(response, str) else response
 
     return {"response": response}
