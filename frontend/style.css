@@ -10,14 +10,12 @@ html, body {
 
 
 #container{
-
     color: white;
     font-family: "Outfit", sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100%;
     font-size: 16px;
-    
 }
 
 nav {
@@ -43,41 +41,7 @@ nav {
     
 }
 
-.home2{
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    
-}
 
-.home2 a{
-    text-decoration: none;
-    color: #1069EF;
-    
-}
-
-.home2 a:hover {
-    text-decoration: underline;
-}
-
-.about a{
-    text-decoration: none;
-    color: #1069EF;
-}
-
-.about a:hover {
-    text-decoration: underline;
-}
-
-.about{
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    color: #1069EF;
-    text-decoration: none;
-}   
 
 .content {
     margin-top: 180px;
@@ -86,9 +50,7 @@ nav {
     justify-content: center;
     align-items: center;
     color: black;
-    
     padding: 20px;
-
 }
 
 .input-container {
@@ -168,35 +130,20 @@ form img{
 }
 
 .content2 {
-    display: flex;
-    flex-wrap: wrap;
     background-color: white;
     color: #505050;
     padding: 20px;
     height: 100vh;
-    justify-content: space-between;
 }
 
-.left-container {
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    justify-content: center; 
-    box-sizing: border-box;
-    
-  }
-
 .left-section{
-    display: flex;
-    flex-direction: column;
+    margin-top: 40px;
     justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
     box-sizing: border-box;
 }
 
 .left-section h1{
-    flex-shrink: 0;
+    margin-top: 60px;
     color: #505050;
     font-size: 64px;
     font-style: normal;
@@ -212,9 +159,7 @@ form img{
   }
 
 .center-section{
-    flex: 1;
     text-align: center;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -224,17 +169,15 @@ form img{
 .center-section p{
     font-size: 20px;
     line-height: 1.5;
-    text-align: left;
-    margin: 0;
-    padding: 0;
+
 }
 
 .bottom-section{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    margin: 0;
+    padding: 0;
     padding: 20px;
     box-sizing: border-box;
 }
